@@ -83,4 +83,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-test-results
-          path: front/test-results # Assurez-vous que les résultats de test sont dans ce chemin
+          path: front/coverage/bobapp # Assurez-vous que les résultats de test sont dans ce chemin
