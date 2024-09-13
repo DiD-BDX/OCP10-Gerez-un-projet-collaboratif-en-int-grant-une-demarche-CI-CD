@@ -63,7 +63,7 @@ jobs:
       - name: Install dependencies and run tests
         working-directory: front # Spécifie le chemin du front-end
         run: |
-          npm install
+          npm clean install
 
       - name: Install Xvfb
         run: sudo apt-get install -y xvfb
@@ -76,7 +76,7 @@ jobs:
       - name: Run tests
         working-directory: front # Spécifie le chemin du front-end
         run: |
-          npm run test -- --browsers=ChromeHeadless # Lancer les tests en mode headless
+          npm run test:prod # Lancer les tests en mode headless
 
       - name: Upload frontend test results
         if: always()
