@@ -74,6 +74,7 @@ jobs:
           export DISPLAY=:99 # Définit la variable d'environnement DISPLAY pour Chrome
 
       - name: Run tests
+        working-directory: front # Spécifie le chemin du front-end
         run: |
           npm run test -- --browsers=ChromeHeadless # Lancer les tests en mode headless
 
