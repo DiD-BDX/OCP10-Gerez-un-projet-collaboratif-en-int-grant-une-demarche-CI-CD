@@ -40,3 +40,35 @@ jobs:
         with:
           name: jacoco-report
           path: back/target/site/jacoco
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Adaptez la version selon votre projet front
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: front/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('front/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies and run tests
+        working-directory: front # Spécifie le chemin du front-end
+        run: |
+          npm install
+          npm test
+
+      - name: Upload frontend test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-test-results
+          path: front/test-results # Assurez-vous que les résultats de test sont dans ce chemin
