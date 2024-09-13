@@ -63,7 +63,7 @@ jobs:
       - name: Install dependencies and run tests
         working-directory: front # Spécifie le chemin du front-end
         run: |
-          npm clean install
+          npm ci
 
       - name: Install Xvfb
         run: sudo apt-get install -y xvfb
