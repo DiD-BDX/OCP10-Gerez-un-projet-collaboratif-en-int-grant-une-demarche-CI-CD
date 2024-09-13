@@ -1,4 +1,4 @@
-name: Backend Tests with JaCoCo
+name: Backend and frontend Tests
 
 on:
   push:
@@ -64,7 +64,18 @@ jobs:
         working-directory: front # Spécifie le chemin du front-end
         run: |
           npm install
-          npm test
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Start Xvfb
+        run: |
+          Xvfb :99 & # Lance un serveur d'affichage virtuel
+          export DISPLAY=:99 # Définit la variable d'environnement DISPLAY pour Chrome
+
+      - name: Run tests
+        run: |
+          npm run test -- --browsers=ChromeHeadless # Lancer les tests en mode headless
 
       - name: Upload frontend test results
         if: always()
