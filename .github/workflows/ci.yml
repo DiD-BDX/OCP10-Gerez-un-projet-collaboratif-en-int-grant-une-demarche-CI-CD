@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  test-backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Install dependencies and run tests
+      - name: Install dependencies and run tests on backend
+        working-directory: back # Chemin du back-end
         run: mvn clean verify
 
       - name: Upload JaCoCo coverage report
@@ -38,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: jacoco-report
-          path: target/site/jacoco
+          path: back/target/site/jacoco
