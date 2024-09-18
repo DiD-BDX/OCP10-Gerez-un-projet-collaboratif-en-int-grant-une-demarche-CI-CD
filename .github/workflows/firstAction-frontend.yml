@@ -1,4 +1,4 @@
-name: Backend and frontend Tests
+name: Frontend Tests
 
 on:
   push:
@@ -9,37 +9,6 @@ on:
       - main
 
 jobs:
-  test-backend:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin' # Vous pouvez changer la version de Java si nécessaire
-
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Install dependencies and run tests on backend
-        working-directory: back # Chemin du back-end
-        run: mvn clean verify
-
-      - name: Upload JaCoCo coverage report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: jacoco-report
-          path: back/target/site/jacoco
   test-frontend:
     runs-on: ubuntu-latest
 
@@ -60,10 +29,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies and run tests
+      - name: Install dependencies
         working-directory: front # Spécifie le chemin du front-end
-        run: |
-          npm ci
+        run: npm ci
 
       - name: Install Xvfb
         run: sudo apt-get install -y xvfb
@@ -75,8 +43,7 @@ jobs:
 
       - name: Run tests
         working-directory: front # Spécifie le chemin du front-end
-        run: |
-          npm run test:prod # Lancer les tests en mode headless
+        run: npm run test:prod # Lancer les tests en mode headless
 
       - name: Upload frontend test results
         if: always()
