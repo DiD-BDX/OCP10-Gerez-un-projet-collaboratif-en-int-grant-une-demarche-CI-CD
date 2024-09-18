@@ -25,7 +25,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Set up Java for SonarQube
-        run: echo "JAVA_HOME_17_X64=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
+        run: echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
   
           
       - name: Cache Maven packages
