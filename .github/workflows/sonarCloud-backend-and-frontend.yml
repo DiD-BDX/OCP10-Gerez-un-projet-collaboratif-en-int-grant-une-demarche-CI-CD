@@ -1,14 +1,14 @@
-name: SonarCloud - Backend and Frontend Test
+name: Build and Analyze
 
 on:
   push:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - main
 
 jobs:
-  # Job pour tester le backend
   backend:
     name: Test Backend and Analyze with SonarQube
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Désactiver les clones superficiels pour une analyse plus complète
+          fetch-depth: 0  # Désactiver les clones superficiels
           
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -41,7 +41,6 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
-  # Job pour tester le frontend
   frontend:
     name: Test Frontend and Analyze with SonarQube
     runs-on: ubuntu-latest
@@ -54,35 +53,46 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: '16.10.0' # Adaptez la version selon votre projet front
 
       - name: Cache Node.js modules
         uses: actions/cache@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node
+          path: front/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('front/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Install dependencies for Frontend
-        working-directory: ./front
-        run: npm install
-        
-      - name: Run Frontend tests
-        working-directory: ./front
-        run: npm test
-      
-      - name: Install SonarScanner
+      - name: Install dependencies
+        working-directory: front # Spécifie le chemin du front-end
+        run: npm ci
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Start Xvfb
         run: |
-          npm install -g sonar-scanner
-        
-      - name: Analyze Frontend with SonarQube
-        working-directory: ./front
+          Xvfb :99 & # Lance un serveur d'affichage virtuel
+          export DISPLAY=:99 # Définit la variable d'environnement DISPLAY pour Chrome
+
+      - name: Run tests
+        working-directory: front # Spécifie le chemin du front-end
+        run: npm run test:prod # Lancer les tests en mode headless
+
+      - name: Run SonarQube Analysis for Frontend
+        working-directory: front
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: sonar-scanner \
+        run: |
+          npx sonar-scanner \
           -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD \
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          
+
+      - name: Upload frontend test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-test-results
+          path: front/coverage/bobapp # Assurez-vous que les résultats de test sont dans ce chemin
