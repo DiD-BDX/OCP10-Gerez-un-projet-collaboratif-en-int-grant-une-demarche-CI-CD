@@ -38,7 +38,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD \
-          -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
@@ -71,6 +70,10 @@ jobs:
       - name: Run Frontend tests
         working-directory: ./front
         run: npm test
+      
+      - name: Install SonarScanner
+        run: |
+          npm install -g sonar-scanner
         
       - name: Analyze Frontend with SonarQube
         working-directory: ./front
