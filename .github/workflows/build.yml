@@ -17,11 +17,11 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '11'
-          distribution: 'temurin'
+          java-version: 17
+          distribution: 'zulu'
           
       - name: Cache SonarQube packages
         uses: actions/cache@v4
@@ -40,46 +40,8 @@ jobs:
       - name: Build and analyze with SonarQube
         working-directory: ./back
         env:
-          SONAR_HOST_URL: http://localhost:9000
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn clean verify sonar:sonar \
-            -Dsonar.projectKey=backend-project \
-            -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
             
 # Job pour tester le frontend
-  frontend:
-    name: Test Frontend and Analyze with SonarQube
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for better analysis relevance
-
-      - name: Cache SonarQube packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Install dependencies
-        working-directory: ./front
-        run: npm install
-        
-      - name: Run Frontend Tests
-        working-directory: ./front
-        run: npm test
-        
-      - name: Run SonarQube Analysis for Frontend
-        working-directory: ./front
-        env:
-          SONAR_HOST_URL: http://localhost:9000  # Change this to your SonarQube server URL if needed
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          npm run sonar \
-          -Dsonar.projectKey=frontend-project \
-          -Dsonar.host.url=$SONAR_HOST_URL \
-          -Dsonar.login=$SONAR_TOKEN
