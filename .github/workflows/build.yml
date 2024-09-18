@@ -36,11 +36,9 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      - name: Move to Backend Directory
-        run: cd back
         
       - name: Build and analyze with SonarQube
+        working-directory: ./back
         env:
           SONAR_HOST_URL: http://localhost:9000
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -66,17 +64,17 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-          
-      - name: Move to Frontend Directory
-        run: cd front
 
       - name: Install dependencies
+        working-directory: ./front
         run: npm install
         
       - name: Run Frontend Tests
+        working-directory: ./front
         run: npm test
         
       - name: Run SonarQube Analysis for Frontend
+        working-directory: ./front
         env:
           SONAR_HOST_URL: http://localhost:9000  # Change this to your SonarQube server URL if needed
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
