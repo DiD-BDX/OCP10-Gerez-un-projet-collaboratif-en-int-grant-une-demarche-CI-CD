@@ -78,7 +78,7 @@ jobs:
           JAVA_HOME: ${{ env.JAVA_HOME }}
         run: |
           java -version  # Vérifier que Java 17 est utilisé
-          mvn -f back/pom.xml sonar:sonar -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=did-bdx -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+          mvn sonar:sonar -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=did-bdx -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Upload JaCoCo coverage report
         if: always()
