@@ -38,7 +38,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: process.env.CI ? ['ChromeHeadlessCI'] : ['ChromeHeadless'],  // Utilise ChromeHeadless dans un environnement CI
-    singleRun: process.env.CI ? true : false, // Important pour que les tests ne restent pas bloqués dans un environnement CI
+    singleRun: !!process.env.CI, // Important pour que les tests ne restent pas bloqués dans un environnement CI
     restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessCI: {
