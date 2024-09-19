@@ -59,6 +59,7 @@ jobs:
           npx sonar-scanner \
           -Dsonar.projectKey=did-bdx_OCP10-frontend \
           -Dsonar.sources=. \
+          -Dsonar.projectName=OCP10-frontend
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=did-bdx \
           -Dsonar.login=${{ secrets.SONAR_TOKEN_FRONTEND }}
