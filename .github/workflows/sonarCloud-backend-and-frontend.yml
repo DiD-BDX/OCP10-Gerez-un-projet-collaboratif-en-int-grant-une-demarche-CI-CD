@@ -46,6 +46,7 @@ jobs:
           -Dsonar.java.binaries=target/classes \
           -Dsonar.junit.reportPaths=target/surefire-reports \
           -Dsonar.jacoco.reportPaths=target/jacoco.exec \
+          -Dsonar.branch.name=main \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         
       - name: Upload JaCoCo coverage report
@@ -110,6 +111,7 @@ jobs:
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=did-bdx \
+          -Dsonar.branch.name=main \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Upload frontend test results
