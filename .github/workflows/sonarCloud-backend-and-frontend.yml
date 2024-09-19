@@ -39,15 +39,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD \
-          -Dsonar.sources=src \
-          -Dsonar.tests=src \
-          -Dsonar.java.binaries=target/classes \
-          -Dsonar.junit.reportPaths=target/surefire-reports \
-          -Dsonar.jacoco.reportPaths=target/jacoco.exec \
-          -Dsonar.branch.name=main \
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
+        
         
       - name: Upload JaCoCo coverage report
         if: always()
@@ -111,7 +104,6 @@ jobs:
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=did-bdx \
-          -Dsonar.branch.name=main \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Upload frontend test results
