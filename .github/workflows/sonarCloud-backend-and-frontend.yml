@@ -56,6 +56,12 @@ jobs:
         with:
           node-version: '16.10.0' # Adaptez la version selon votre projet front
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'zulu'
+
       - name: Cache Node.js modules
         uses: actions/cache@v4
         with:
