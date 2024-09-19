@@ -53,7 +53,7 @@ jobs:
       - name: Run SonarQube Analysis for Frontend
         working-directory: front
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
           JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
         run: |
           npx sonar-scanner \
@@ -61,7 +61,7 @@ jobs:
           -Dsonar.sources=. \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=did-bdx \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.login=${{ secrets.SONAR_TOKEN_FRONTEND }}
 
       - name: Upload frontend test results
         if: always()
