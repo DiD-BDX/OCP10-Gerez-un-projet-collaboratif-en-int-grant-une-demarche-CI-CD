@@ -37,19 +37,14 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
-    singleRun: false,
+    browsers: process.env.CI ? ['ChromeHeadlessCI'] : ['ChromeHeadless'],  // Utilise ChromeHeadless dans un environnement CI
+    singleRun: process.env.CI ? true : false, // Important pour que les tests ne restent pas bloqués dans un environnement CI
     restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']  // Ajoute cette option pour éviter des problèmes de permission dans un environnement CI
       }
-    },
-
-    // Remplace la ligne browsers par celle-ci dans les environnements CI
-    browsers: process.env.CI ? ['ChromeHeadlessCI'] : ['Chrome'],
-    
-    singleRun: true  // Important pour que les tests ne restent pas bloqués dans un environnement CI
+    }
   });
 };
