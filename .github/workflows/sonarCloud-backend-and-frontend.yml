@@ -27,7 +27,6 @@ jobs:
       - name: Set up Java for SonarQube
         run: echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
   
-          
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
