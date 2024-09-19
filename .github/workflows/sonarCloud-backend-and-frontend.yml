@@ -24,9 +24,6 @@ jobs:
           java-version: 17
           distribution: 'zulu'
 
-      - name: Set up Java for SonarQube
-        run: echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -80,10 +77,13 @@ jobs:
           sudo mv sonar-scanner-4.8.0.2856-linux /opt/sonar-scanner
           echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
 
+      - name: Set Java Home for SonarScanner
+        run: echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
+
       - name: Run SonarQube Analysis for both Backend and Frontend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
+          JAVA_HOME: ${{ env.JAVA_HOME }}
         run: |
           sonar-scanner \
           -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD \
