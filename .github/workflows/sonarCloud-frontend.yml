@@ -65,6 +65,10 @@ jobs:
           -Dsonar.token=${{ secrets.SONAR_TOKEN_FRONTEND }} \
           -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
 
+      - name: List coverage files
+        working-directory: front
+        run: ls -l coverage/bobapp
+
       - name: Upload frontend test results
         if: always()
         uses: actions/upload-artifact@v4
