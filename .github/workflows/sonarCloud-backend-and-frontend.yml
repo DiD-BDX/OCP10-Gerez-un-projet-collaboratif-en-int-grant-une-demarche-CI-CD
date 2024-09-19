@@ -1,4 +1,4 @@
-name: Build and Analyze
+name: Sonar Cloud - Backend and Frontend tests
 
 on:
   push:
