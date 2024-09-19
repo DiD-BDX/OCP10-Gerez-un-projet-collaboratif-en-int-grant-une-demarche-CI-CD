@@ -85,8 +85,8 @@ jobs:
           JAVA_HOME: ${{ env.JAVA_HOME }}
           PATH: "/opt/sonar-scanner/bin:$PATH"
         run: |
-          bash -c "java -version"  # Vérifier que Java 17 est utilisé
-          bash -c "sonar-scanner \
+          /bin/bash -c "java -version"  # Vérifier que Java 17 est utilisé
+          /bin/bash -c "sonar-scanner \
           -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=did-bdx \
