@@ -65,7 +65,7 @@ jobs:
 
       - name: Build and Test Backend
         working-directory: ./back
-        run: mvn -B verify
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DiD-BDX_OCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
 
       # Installer SonarScanner
       - name: Install SonarScanner
