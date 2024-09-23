@@ -19,7 +19,7 @@ jobs:
         node-version: '16'
 
     - name: Install dependencies
-      run: yarn
+      run: npm install
       working-directory: front
 
     - name: Build project
