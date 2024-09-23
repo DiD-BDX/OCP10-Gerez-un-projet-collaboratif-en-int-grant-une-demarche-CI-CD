@@ -1,4 +1,4 @@
-name: SonarCloud - Backend test and analysis
+name: SonarCloud - Backend test and analysis (CI)
 on:
   push:
     branches:
