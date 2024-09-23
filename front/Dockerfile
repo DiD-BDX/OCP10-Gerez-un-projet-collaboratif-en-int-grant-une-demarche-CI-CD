@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copie uniquement les fichiers nécessaires pour npm install
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --ignore-scripts
 
 # Copie uniquement les fichiers nécessaires pour la construction
 COPY src ./src
