@@ -1,0 +1,68 @@
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+**/.DS_Store
+**/__pycache__
+**/.venv
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+[README.md](http://_vscodecontentref_/#%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22%2FUsers%2Fdidierbd%2FLibrary%2FCloudStorage%2FSynologyDrive-Didier-BD%2FDOCUMENTS%2FFORMATIONS%2FOPENCLASSROOMS%2FDEV%20FULL%20STACK%20et%20ANGULAR%2FP10%20-%20G%C3%A9rez%20un%20projet%20collaboratif%20en%20int%C3%A9grant%20une%20d%C3%A9marche%20CI%3ACD%2FOC-P10%20-%20Repository%20GitHub%2FOCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD%2FREADME.md%22%2C%22path%22%3A%22%2FUsers%2Fdidierbd%2FLibrary%2FCloudStorage%2FSynologyDrive-Didier-BD%2FDOCUMENTS%2FFORMATIONS%2FOPENCLASSROOMS%2FDEV%20FULL%20STACK%20et%20ANGULAR%2FP10%20-%20G%C3%A9rez%20un%20projet%20collaboratif%20en%20int%C3%A9grant%20une%20d%C3%A9marche%20CI%3ACD%2FOC-P10%20-%20Repository%20GitHub%2FOCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD%2FREADME.md%22%2C%22scheme%22%3A%22file%22%7D%7D)
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+**/.DS_Store
+**/__pycache__
+**/.venv
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+[README.md](http://_vscodecontentref_/#%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22%2FUsers%2Fdidierbd%2FLibrary%2FCloudStorage%2FSynologyDrive-Didier-BD%2FDOCUMENTS%2FFORMATIONS%2FOPENCLASSROOMS%2FDEV%20FULL%20STACK%20et%20ANGULAR%2FP10%20-%20G%C3%A9rez%20un%20projet%20collaboratif%20en%20int%C3%A9grant%20une%20d%C3%A9marche%20CI%3ACD%2FOC-P10%20-%20Repository%20GitHub%2FOCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD%2FREADME.md%22%2C%22path%22%3A%22%2FUsers%2Fdidierbd%2FLibrary%2FCloudStorage%2FSynologyDrive-Didier-BD%2FDOCUMENTS%2FFORMATIONS%2FOPENCLASSROOMS%2FDEV%20FULL%20STACK%20et%20ANGULAR%2FP10%20-%20G%C3%A9rez%20un%20projet%20collaboratif%20en%20int%C3%A9grant%20une%20d%C3%A9marche%20CI%3ACD%2FOC-P10%20-%20Repository%20GitHub%2FOCP10-Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD%2FREADME.md%22%2C%22scheme%22%3A%22file%22%7D%7D)
