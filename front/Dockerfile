@@ -8,7 +8,6 @@ RUN npm install
 
 # Copie uniquement les fichiers nécessaires pour la construction
 COPY src ./src
-COPY public ./public
 COPY angular.json ./
 COPY tsconfig.json ./
 COPY tsconfig.app.json ./
