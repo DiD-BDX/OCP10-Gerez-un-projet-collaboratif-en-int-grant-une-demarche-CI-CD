@@ -1,41 +1,48 @@
 name: Deploy Frontend to Docker Hub (CD)
 
+# Déclencheur du workflow
 on:
   push:
     branches:
-      - main
+      - main  # Déclenche le workflow sur les pushs vers la branche main
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Utilise un runner GitHub avec l'image ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      # Étape 1: Checkout du code source
+      - name: Checkout code
+        uses: actions/checkout@v4  # Utilise l'action checkout pour récupérer le code source du repository
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '16'
+      # Étape 2: Configuration de Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'  # Spécifie la version de Node.js à utiliser
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: front
+      # Étape 3: Installation des dépendances
+      - name: Install dependencies
+        run: npm install  # Installe les dépendances du projet
+        working-directory: front  # Spécifie le répertoire de travail pour cette étape
 
-    - name: Build project
-      run: npm run build
-      working-directory: front
+      # Étape 4: Construction du projet
+      - name: Build project
+        run: npm run build  # Exécute la commande de build pour construire l'application
+        working-directory: front  # Spécifie le répertoire de travail pour cette étape
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      # Étape 5: Connexion à Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # Utilise le nom d'utilisateur Docker Hub stocké dans les secrets
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Utilise le mot de passe Docker Hub stocké dans les secrets
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4
-      with:
-        context: front
-        file: front/Dockerfile
-        push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+      # Étape 6: Construction et push de l'image Docker
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: front  # Spécifie le contexte de build Docker
+          file: front/Dockerfile  # Spécifie le fichier Dockerfile à utiliser
+          push: true  # Indique que l'image doit être poussée vers Docker Hub
+          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest  # Tag de l'image Docker

@@ -1,45 +1,59 @@
 name: SonarCloud - Backend test and analysis (CI)
+
+# Déclencheurs du workflow
 on:
   push:
     branches:
-      - main
+      - main  # Déclenche le workflow sur les pushs vers la branche main
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]  # Déclenche le workflow sur les pull requests ouvertes, synchronisées ou rouvertes
+
 jobs:
   build:
-    name: Build and analyze
-    runs-on: ubuntu-latest
+    name: Build and analyze  # Nom du job
+    runs-on: ubuntu-latest  # Utilise un runner GitHub avec l'image ubuntu-latest
+
     steps:
+      # Étape 1: Checkout du code source
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Désactive les clones superficiels pour une meilleure pertinence de l'analyse
+
+      # Étape 2: Configuration de JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
+          java-version: 17  # Spécifie la version de Java à utiliser
+          distribution: 'zulu'  # Utilise la distribution Zulu de JDK
+
+      # Étape 3: Cache des packages SonarCloud
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
         with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+          path: ~/.sonar/cache  # Chemin du cache SonarCloud
+          key: ${{ runner.os }}-sonar  # Clé pour identifier le cache
+          restore-keys: ${{ runner.os }}-sonar  # Clé pour restaurer le cache
+
+      # Étape 4: Cache des packages Maven
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+          path: ~/.m2  # Chemin du cache Maven
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}  # Clé pour identifier le cache, basée sur le hash des fichiers pom.xml
+          restore-keys: ${{ runner.os }}-m2  # Clé pour restaurer le cache
+
+      # Étape 5: Build et analyse avec SonarCloud
       - name: Build and analyze
-        working-directory: back
+        working-directory: back  # Répertoire de travail pour cette étape
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=did-bdx_OCP10-backend -Dsonar.projectName=OCP10-backend
-        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Jeton GitHub pour obtenir des informations sur les pull requests
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACKEND }}  # Jeton d'accès pour SonarCloud
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=did-bdx_OCP10-backend -Dsonar.projectName=OCP10-backend  # Commande Maven pour vérifier le projet et lancer l'analyse SonarCloud
+
+      # Étape 6: Upload du rapport de couverture JaCoCo
       - name: Upload JaCoCo coverage report
-        if: always()
+        if: always()  # Cette étape s'exécute toujours, même si les étapes précédentes échouent
         uses: actions/upload-artifact@v4
         with:
-          name: jacoco-report
-          path: back/target/site/jacoco
+          name: jacoco-report  # Nom de l'artifact
+          path: back/target/site/jacoco  # Chemin du rapport de couverture JaCoCo
