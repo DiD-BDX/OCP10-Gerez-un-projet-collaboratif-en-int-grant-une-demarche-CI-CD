@@ -179,4 +179,13 @@ Le KPI num 3 est le nombre de Security Hotspots Reviewed. Il est mesuré par Son
 
 
 #### Retours utilisateurs
-- 
+1. "Je mets une étoile car je ne peux pas en mettre zéro ! Impossible de poster une suggestion de blague, le bouton tourne et fait planter mon navigateur"
+2. "#BobApp j'ai remonté un bug sur le post de vidéo il y a deux semaines et il est encore présent ! Les devs vous faites quoi????"
+
+Ces 2 retours sont symptomatiques d'un probleme de performance et de stabilité de l'application. La mise en place d'un pipeline CI/CD avec des tests et des analyses de code permet de détecter et de corriger ces problèmes avant que le code ne soit mis en production.
+
+3. "Ca fait une semaine que je ne reçois plus rien, j'ai envoyé un email il y a 5 jours mais toujours pas de nouvelles..."
+
+4. "J'ai supprimé ce site de mes favoris ce matin, dommage, vraiment dommage."
+
+Ces 2 retours utilisateur sont symptomatiques d'un probleme de communication entre les équipes de développement et les utilisateurs. La mise en place d'un pipeline CI/CD avec des KPIs permet de suivre la qualité du code et de communiquer efficacement avec les utilisateurs.
