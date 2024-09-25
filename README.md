@@ -6,7 +6,7 @@
 - [Table des Matières](#table-des-matières)
   - [1 - Introduction](#1---introduction)
     - [Pipeline CI/CD](#pipeline-cicd)
-    - [GitActions](#gitactions)
+    - [GitHub Actions](#github-actions)
     - [Docker](#docker)
     - [SonarCloud](#sonarcloud)
   - [2 - Installation d'un pipeline CI/CD](#2---installation-dun-pipeline-cicd)
@@ -21,7 +21,7 @@
     - [2. Configuration de Docker](#2-configuration-de-docker)
       - [Création de 2 fichiers github actions.](#création-de-2-fichiers-github-actions)
       - [Création de 2 fichiers `Dockerfile` de configuration.](#création-de-2-fichiers-dockerfile-de-configuration)
-    - [3. Configuration des GitActions](#3-configuration-des-gitactions)
+    - [3. Configuration des GitHub Actions](#3-configuration-des-github-actions)
     - [4. Configuration de Karma et JaCoCo pour les tests \& couverture de code](#4-configuration-de-karma-et-jacoco-pour-les-tests--couverture-de-code)
       - [Configuration de Karma](#configuration-de-karma)
       - [Configuration de JaCoCo](#configuration-de-jacoco)
@@ -31,11 +31,10 @@
   - [5 - Etapes des GitActions pour le frontend](#5---etapes-des-gitactions-pour-le-frontend)
     - [CI-sonarCloud-frontend.yml](#ci-sonarcloud-frontendyml)
     - [CD-dockerHub-deploy-frontend.yml](#cd-dockerhub-deploy-frontendyml)
-  - [5 - Ajout des KPIs (via SonarCloud et des Quality Gates)](#5---ajout-des-kpis-via-sonarcloud-et-des-quality-gates)
+  - [6 - Ajout des KPIs (via SonarCloud et des Quality Gates)](#6---ajout-des-kpis-via-sonarcloud-et-des-quality-gates)
     - [KPI num 1: Coverage](#kpi-num-1-coverage)
-    - [KPI num 2: Bugs](#kpi-num-2-bugs)
-    - [KPI num 3: Security hotspots Reviewed](#kpi-num-3-security-hotspots-reviewed)
-  - [6 - Analyse des metriques et retours utilisateurs](#6---analyse-des-metriques-et-retours-utilisateurs)
+    - [KPI num 2: Security hotspots Reviewed](#kpi-num-2-security-hotspots-reviewed)
+  - [7 - Analyse des metriques et retours utilisateurs](#7---analyse-des-metriques-et-retours-utilisateurs)
     - [1. Metriques](#1-metriques)
       - [Couverture de code frontend](#couverture-de-code-frontend)
       - [Couverture de code backend](#couverture-de-code-backend)
@@ -44,7 +43,7 @@
 ## 1 - Introduction
 ### Pipeline CI/CD
 Continuous Integration/Continuous Deployment (Intégration Continue/Déploiement Continue) est un ensemble de pratiques automatisées qui permettent de tester et de déployer automatiquement les modifications apportées à un projet. Ces pratiques permettent de garantir la qualité du code et de faciliter le déploiement des applications.
-### GitActions
+### GitHub Actions
 GitHub Actions est un service d'intégration et de déploiement continu (CI/CD) qui permet d'automatiser les tâches de développement telles que la création, les tests et le déploiement de code directement depuis GitHub. Les actions sont des scripts qui s'exécutent automatiquement en réponse à des événements spécifiques sur un dépôt GitHub (comme la création d'une pull request, le push de code, la création d'une release, etc.).
 ### Docker
 Docker est une plateforme open-source qui permet de créer, de déployer et de gérer des applications dans des conteneurs. Les conteneurs sont des environnements isolés qui contiennent tout ce dont une application a besoin pour s'exécuter (code, dépendances, bibliothèques, etc.). Docker permet de créer des conteneurs légers et portables qui peuvent s'exécuter sur n'importe quel système d'exploitation.
@@ -104,7 +103,7 @@ Ces fichiers contiennent les configurations pour les services Docker de l'applic
 #### Création de 2 fichiers `Dockerfile` de configuration. 
 A la racine du dossier frontend et du dossier backend. Ces fichiers contiennent les instructions pour construire l'image Docker de l'application. Voir les commentaires dans les fichiers pour plus de détails.
 
-### 3. Configuration des GitActions
+### 3. Configuration des GitHub Actions
 Création de 4 fichiers `****.yml` à la racine du dossier `.github/workflows`. 2 fichiers pour les actions CI (Continuous integration) et 2 fichiers CD (Continuous Deployment).  
 Voir les commentaires dans les fichiers pour plus de détails.
 
@@ -159,23 +158,23 @@ Le fichier `pom.xml` fourni dans le projet, contient la configuration de JaCoCo.
 6. Construction et push de l'image Docker
 
 *Ce workflow GitHub Actions déploie le frontend sur Docker Hub. Il se déclenche sur les pushs vers la branche main. Les étapes incluent le checkout du code, la configuration de Node.js, l'installation des dépendances, la construction du projet, la connexion à Docker Hub, et la construction et le push de l'image Docker.*
-## 5 - Ajout des KPIs (via SonarCloud et des Quality Gates)
+## 6 - Ajout des KPIs (via SonarCloud et des Quality Gates)
 Ajout de KPIs (Key Performance Indicators) au projet via des Quality Gates.
 ### KPI num 1: Coverage
 Le KPI num 1 est la couverture de code. Il est mesuré par JaCoCo et affiché dans SonarCloud. Le Quality Gate pour ce KPI est de 80%. Ca signifie que le code doit avoir une couverture de code de 80% ou plus pour passer le Quality Gate.
-### KPI num 2: Bugs
-Le KPI num 2 est le nombre de bugs. Il est mesuré par SonarCloud et affiché dans le tableau de bord. Le Quality Gate pour ce KPI est de 0. Ca signifie qu'il ne doit pas y avoir de bugs dans le code pour passer le Quality Gate.
-### KPI num 3: Security hotspots Reviewed
-Le KPI num 3 est le nombre de Security Hotspots Reviewed. Il est mesuré par SonarCloud et affiché dans le tableau de bord. Le Quality Gate pour ce KPI est de moins de 100%. Ca signifie qu'il ne doit pas y avoir de Security Hotspots Reviewed dans le code pour passer le Quality Gate.
+### KPI num 2: Security hotspots Reviewed
+Le KPI num 3 est le nombre de Security Hotspots Reviewed. Un Security Hotspot est un indicateur de risque potentiel dans le code qui nécessite une attention particulière pour garantir qu'il ne devienne pas une vulnérabilité de sécurité.
+Il est mesuré par SonarCloud et affiché dans le tableau de bord. Le Quality Gate pour ce KPI est de moins de 100%. Ca signifie qu'il ne doit pas y avoir de Security Hotspots Reviewed dans le code pour passer le Quality Gate.
 
-## 6 - Analyse des metriques et retours utilisateurs
+## 7 - Analyse des metriques et retours utilisateurs
 ### 1. Metriques
 #### Couverture de code frontend
 ![alt text](.images/CI-frontend-report.png)
+Le coverage est ici de 27% ce qui est très faible. Il faudrait augmenter la couverture de code pour passer le Quality Gate. Il y a aussi 1 security hotspot reviewed qui doit être corrigé pour passer le Quality Gate.
 
 #### Couverture de code backend
 ![alt text](.images/CI-backend-report.png)
-
+Le coverage est de 38,8% ce qui est également faible. Il faudrait augmenter la couverture de code pour passer le Quality Gate. Il y a aussi 2 security hotspots reviewed qui doivent être corrigés pour passer le Quality Gate.
 
 
 #### Retours utilisateurs
@@ -189,3 +188,6 @@ Ces 2 retours sont symptomatiques d'un probleme de performance et de stabilité 
 4. "J'ai supprimé ce site de mes favoris ce matin, dommage, vraiment dommage."
 
 Ces 2 retours utilisateur sont symptomatiques d'un probleme de communication entre les équipes de développement et les utilisateurs. La mise en place d'un pipeline CI/CD avec des KPIs permet de suivre la qualité du code et de communiquer efficacement avec les utilisateurs.
+
+> [!NOTE]
+>Pour mettre en place une strategie CI/CD efficace, il est important de suivre les KPIs, d'analyser les retours utilisateurs et de corriger les problemes rapidement. Il serait judicieux de modifier les gitHub actions de CD pour que le deploiement ne se fasse que si les Quality Gates sont passés.
