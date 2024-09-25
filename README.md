@@ -36,8 +36,10 @@
     - [KPI num 2: Bugs](#kpi-num-2-bugs)
     - [KPI num 3: Security hotspots Reviewed](#kpi-num-3-security-hotspots-reviewed)
   - [6 - Analyse des metriques et retours utilisateurs](#6---analyse-des-metriques-et-retours-utilisateurs)
-    - [Metriques](#metriques)
-  - [Licence](#licence)
+    - [1. Metriques](#1-metriques)
+      - [Couverture de code frontend](#couverture-de-code-frontend)
+      - [Couverture de code backend](#couverture-de-code-backend)
+      - [Retours utilisateurs](#retours-utilisateurs)
 
 ## 1 - Introduction
 ### Pipeline CI/CD
@@ -167,8 +169,14 @@ Le KPI num 2 est le nombre de bugs. Il est mesuré par SonarCloud et affiché da
 Le KPI num 3 est le nombre de Security Hotspots Reviewed. Il est mesuré par SonarCloud et affiché dans le tableau de bord. Le Quality Gate pour ce KPI est de moins de 100%. Ca signifie qu'il ne doit pas y avoir de Security Hotspots Reviewed dans le code pour passer le Quality Gate.
 
 ## 6 - Analyse des metriques et retours utilisateurs
-### Metriques
+### 1. Metriques
+#### Couverture de code frontend
+![alt text](.images/CI-frontend-report.png)
+
+#### Couverture de code backend
+![alt text](.images/CI-backend-report.png)
 
 
-## Licence
-<!-- Ajoutez ici les informations sur la licence -->
+
+#### Retours utilisateurs
+- 
