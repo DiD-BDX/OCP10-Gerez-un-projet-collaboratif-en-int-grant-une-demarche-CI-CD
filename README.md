@@ -40,6 +40,10 @@
       - [Couverture de code backend](#couverture-de-code-backend)
       - [Retours utilisateurs](#retours-utilisateurs)
 
+
+
+
+
 ## 1 - Introduction
 ### Pipeline CI/CD
 Continuous Integration/Continuous Deployment (Intégration Continue/Déploiement Continue) est un ensemble de pratiques automatisées qui permettent de tester et de déployer automatiquement les modifications apportées à un projet. Ces pratiques permettent de garantir la qualité du code et de faciliter le déploiement des applications.
