@@ -39,3 +39,14 @@ build/
 .mvn
 
 .angular
+
+### Node ###
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log*
+
+### Apple ###
+.DS_Store
+.AppleDouble
+.LSOverride

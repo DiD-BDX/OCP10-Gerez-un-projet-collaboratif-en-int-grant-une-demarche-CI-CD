@@ -33,7 +33,7 @@ jobs:
 
       # Étape 5: Connexion à Docker Hub
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}  # Utilise le nom d'utilisateur Docker Hub stocké dans les secrets
           password: ${{ secrets.DOCKER_PASSWORD }}  # Utilise le mot de passe Docker Hub stocké dans les secrets

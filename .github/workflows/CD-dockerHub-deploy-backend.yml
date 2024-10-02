@@ -13,11 +13,11 @@ jobs:
     steps:
       # Étape 1: Checkout du code source
       - name: Checkout code
-        uses: actions/checkout@v2  # Utilise l'action checkout pour récupérer le code source du repository
+        uses: actions/checkout@v4  # Utilise l'action checkout pour récupérer le code source du repository
 
       # Étape 2: Configuration de JDK 11
       - name: Set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '11'  # Spécifie la version de Java à utiliser
           distribution: 'adopt'  # Utilise la distribution AdoptOpenJDK
@@ -29,14 +29,14 @@ jobs:
 
       # Étape 4: Connexion à Docker Hub
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}  # Utilise le nom d'utilisateur Docker Hub stocké dans les secrets
           password: ${{ secrets.DOCKER_PASSWORD }}  # Utilise le mot de passe Docker Hub stocké dans les secrets
 
       # Étape 5: Construction et push de l'image Docker
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: back  # Spécifie le contexte de build Docker
           file: back/Dockerfile  # Spécifie le fichier Dockerfile à utiliser
