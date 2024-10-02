@@ -84,7 +84,7 @@ jobs:
 
       # Étape 11: Upload des résultats de test frontend
       - name: Upload frontend test results
-        if: always()  # Cette étape s'exécute toujours, même si les étapes précédentes échouent
+        if: always() 
         uses: actions/upload-artifact@v4
         with:
           name: frontend-test-results  # Nom de l'artifact
